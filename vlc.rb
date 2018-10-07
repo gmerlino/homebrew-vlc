@@ -32,26 +32,46 @@ class Vlc < Formula
     # this is needed to find some m4 macros installed by homebrew's pkg-config 
     aclocal = "ACLOCAL_ARGS=\"-I /usr/local/share/aclocal\""
 
-    if MacOS.version >= "10.11"
+    if MacOS.version >= "10.14"
+      sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk"
+      cfl = "CFLAGS=\"-I#{gettext.include}  -mmacosx-version-min=10.6\""
+      cxxfl = "CXXFLAGS=\" -mmacosx-version-min=10.6\""
+      darwinVer = "x86_64-apple-darwin18"
+    elsif MacOS.version >= "10.13"
+      sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk"
+      cfl = "CFLAGS=\"-I#{gettext.include}  -mmacosx-version-min=10.6\""
+      cxxfl = "CXXFLAGS=\" -mmacosx-version-min=10.6\""
+      darwinVer = "x86_64-apple-darwin17"
+    elsif MacOS.version >= "10.12"
+      sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk"
+      cfl = "CFLAGS=\"-I#{gettext.include}  -mmacosx-version-min=10.6\""
+      cxxfl = "CXXFLAGS=\" -mmacosx-version-min=10.6\""
+      darwinVer = "x86_64-apple-darwin16"
+    elsif MacOS.version >= "10.11"
       sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"
       cfl = "CFLAGS=\"-I#{gettext.include}  -mmacosx-version-min=10.6\""
       cxxfl = "CXXFLAGS=\" -mmacosx-version-min=10.6\""
+      darwinVer = "x86_64-apple-darwin15"
     elsif MacOS.version >= "10.10"
       sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk"
       cfl = "CFLAGS=\"-I#{gettext.include}  -mmacosx-version-min=10.6\""
       cxxfl = "CXXFLAGS=\" -mmacosx-version-min=10.6\""
+      darwinVer = "x86_64-apple-darwin14"
     elsif MacOS.version >= "10.9"
       sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk"
       cfl = "CFLAGS=\"-I#{gettext.include}  -mmacosx-version-min=10.6\""
       cxxfl = "CXXFLAGS=\" -mmacosx-version-min=10.6\""
+      darwinVer = "x86_64-apple-darwin13"
     elsif MacOS.version >= "10.8"
       sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk"
       cfl = "CFLAGS=\"-I#{gettext.include}  -mmacosx-version-min=10.6\""
       cxxfl = "CXXFLAGS=\" -mmacosx-version-min=10.6\""
+      darwinVer = "x86_64-apple-darwin12"
     else
       sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk"
       cfl = "CFLAGS=\"-I#{gettext.include}  -mmacosx-version-min=10.6\""
       cxxfl = "CXXFLAGS=\" -mmacosx-version-min=10.6\""
+      darwinVer = "x86_64-apple-darwin11"
     end
 
     libt = "LIBTOOL=\"/usr/local/bin/glibtool --tag=CC\""
@@ -64,7 +84,7 @@ class Vlc < Formula
       exp = "export #{aclocal}; export #{cc}; export #{cxx}; export #{objc}; export #{ldf}; export #{cfl}; export #{cxxfl}; export SDKROOT=#{sdk}; export #{libt}; export #{libtfl}; export OSX_VERSION=#{MacOS.version}"
     end
 
-    darwinVer = "x86_64-apple-darwin11"
+    darwinVer = "x86_64-apple-darwin18"
 
     # Additional Libs
     # KLN 20/08/2012 Added 'make .ogg' and 'make .vorbis' in order to get this recipe to work on OSX 10.6
